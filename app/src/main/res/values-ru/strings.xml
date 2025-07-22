@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="new_note">Новая заметка</string>
+    <string name="save_note">Сохранить заметку</string>
+</resources>
