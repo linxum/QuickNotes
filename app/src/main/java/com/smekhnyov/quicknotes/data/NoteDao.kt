@@ -10,14 +10,17 @@ import androidx.room.Update
 @Dao
 interface NoteDao {
     @Query("SELECT * FROM notes ORDER BY updatedAt DESC")
-    suspend fun getAllNotes(): List<Note>
+    suspend fun getAll(): List<Note>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(note: Note)
+    suspend fun insert(note: Note)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateNote(note: Note)
+    suspend fun update(note: Note)
 
     @Delete
-    suspend fun deleteNote(note: Note)
+    suspend fun delete(note: Note)
+
+    @Query("SELECT * FROM notes WHERE id = :id")
+    suspend fun getById(id: Int): Note?
 }

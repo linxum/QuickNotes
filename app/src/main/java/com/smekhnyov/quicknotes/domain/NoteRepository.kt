@@ -5,20 +5,24 @@ import com.smekhnyov.quicknotes.data.NoteDao
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    suspend fun getAllNotes(): List<Note> {
-        return noteDao.getAllNotes()
+    suspend fun getAll(): List<Note> {
+        return noteDao.getAll()
     }
 
-    suspend fun insertNote(note: Note) {
-        noteDao.insertNote(note)
+    suspend fun insert(note: Note) {
+        noteDao.insert(note)
     }
 
-    suspend fun updateNote(note: Note) {
+    suspend fun update(note: Note) {
         note.updatedAt = System.currentTimeMillis()
-        noteDao.updateNote(note)
+        noteDao.update(note)
     }
 
-    suspend fun deleteNote(note: Note) {
-        noteDao.deleteNote(note)
+    suspend fun delete(note: Note) {
+        noteDao.delete(note)
+    }
+
+    suspend fun getById(id: Int): Note? {
+        return noteDao.getById(id)
     }
 }
