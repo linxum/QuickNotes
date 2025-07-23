@@ -27,13 +27,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.room.Update
 import com.smekhnyov.quicknotes.ui.theme.QuickNotesTheme
 import com.smekhnyov.quicknotes.R
 import com.smekhnyov.quicknotes.data.Note
 import com.smekhnyov.quicknotes.data.NoteDatabase
 import com.smekhnyov.quicknotes.domain.NoteRepository
-import kotlin.collections.set
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

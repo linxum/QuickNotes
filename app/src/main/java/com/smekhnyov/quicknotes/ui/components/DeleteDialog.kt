@@ -1,6 +1,5 @@
 package com.smekhnyov.quicknotes.ui.components
 
-import android.app.AlertDialog
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
