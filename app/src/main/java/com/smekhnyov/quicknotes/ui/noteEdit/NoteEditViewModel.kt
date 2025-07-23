@@ -1,18 +1,15 @@
 package com.smekhnyov.quicknotes.ui.noteEdit
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.smekhnyov.quicknotes.data.Note
 import com.smekhnyov.quicknotes.domain.NoteRepository
-import com.smekhnyov.quicknotes.ui.noteView.NoteViewModel
 import kotlinx.coroutines.launch
 
 class NoteEditViewModel(private val repository: NoteRepository) : ViewModel() {
     private val _notes = MutableLiveData<List<Note>>()
-    val notes: LiveData<List<Note>> get() = _notes
 
     init {
         viewModelScope.launch {
