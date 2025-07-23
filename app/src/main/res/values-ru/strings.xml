@@ -2,4 +2,13 @@
 <resources>
     <string name="new_note">Новая заметка</string>
     <string name="save_note">Сохранить заметку</string>
+    <string name="edit_note">Изменить заметку</string>
+    <string name="delete_note">Удалить заметку</string>
+    <string name="back">Назад</string>
+    <string name="note_title">Название заметки</string>
+    <string name="note_body">Текст заметки</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="delete_confirm">Вы точно хотите удалить эту заметку?</string>
+    <string name="last_update">"Последнее обновление: "</string>
 </resources>
