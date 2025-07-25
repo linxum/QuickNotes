@@ -1,6 +1,5 @@
 package com.smekhnyov.quicknotes.ui.noteList
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -18,8 +17,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import com.smekhnyov.quicknotes.data.Note
 import com.smekhnyov.quicknotes.ui.components.NoteListItem
-import androidx.compose.material3.Button
-import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -32,7 +29,10 @@ fun NoteList(
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text(text = stringResource(id = R.string.app_name)) }
+                    title = { Text(text = stringResource(id = R.string.app_name)) },
+                    colors = androidx.compose.material3.TopAppBarDefaults.topAppBarColors(
+                        titleContentColor = androidx.compose.material3.MaterialTheme.colorScheme.primary
+                    )
                 )
             },
             floatingActionButton = {
@@ -48,16 +48,11 @@ fun NoteList(
         ) { innerPadding ->
             LazyColumn(modifier = androidx.compose.ui.Modifier.padding(innerPadding)) {
                 items(notes.size) { index ->
-                    Button(
-                        onClick = { onNoteClick(notes[index].id) },
-                        modifier = Modifier.fillMaxWidth(),
-
-                    ) {
-                        NoteListItem(
-                            title = notes[index].title,
-                            body = notes[index].body
-                        )
-                    }
+                    NoteListItem(
+                        title = notes[index].title,
+                        body = notes[index].body,
+                        onClick = { onNoteClick(notes[index].id) }
+                    )
                 }
             }
         }
@@ -71,9 +66,8 @@ fun NoteListPreview() {
         Note(id = 1, title = "Sample Note 1", body = "This is the body of sample note 1"),
         Note(id = 2, title = "Sample Note 2", body = "This is the body of sample note 2")
     )
-    NoteList(notes, onNoteClick = { /* Handle note click */ }, onAddNote = { /* Handle add note */ })
-}
-
-fun none() {
-    return
+    NoteList(
+        notes,
+        onNoteClick = { /* Handle note click */ },
+        onAddNote = { /* Handle add note */ })
 }
