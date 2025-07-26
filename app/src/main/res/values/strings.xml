@@ -11,4 +11,5 @@
     <string name="no">No</string>
     <string name="delete_confirm">Confirm delete this note</string>
     <string name="last_update">"Last update: "</string>
+    <string name="empty_note_list">There is no notes</string>
 </resources>
