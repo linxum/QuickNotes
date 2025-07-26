@@ -37,8 +37,9 @@ import com.smekhnyov.quicknotes.domain.NoteRepository
 @Composable
 fun NoteEdit(
     note: Note? = null,
-    navController: androidx.navigation.NavHostController,
+    navController: NavHostController,
     repository: NoteRepository,
+    setUpdateState: (Boolean) -> Unit = {},
     vm: NoteEditViewModel = viewModel(
         factory = NoteEditViewModelFactory(repository)
     )
@@ -72,9 +73,10 @@ fun NoteEdit(
                 FloatingActionButton(
                     onClick = {
                         vm.saveNote(
-                            Note(id = note?.id ?: 0, title = title, body = body)
+                            Note(id = note?.id ?: 0, title = title, body = body),
+                            setUpdateState = setUpdateState
                         )
-                        navController.navigateUp()
+                        navController.popBackStack()
                     },
                 ) {
                     Icon(
@@ -95,7 +97,9 @@ fun NoteEdit(
                     singleLine = true,
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
                     )
                 )
                 TextField(
@@ -108,7 +112,9 @@ fun NoteEdit(
                     maxLines = Int.MAX_VALUE,
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
                     )
                 )
             }

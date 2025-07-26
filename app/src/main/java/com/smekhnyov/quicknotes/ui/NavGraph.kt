@@ -27,6 +27,11 @@ fun QuickNotesNavGraph(
     repository: NoteRepository,
     navController: NavHostController = rememberNavController()
 ) {
+    val updateState = remember { mutableStateOf(false) }
+    val setUpdateState = { value: Boolean ->
+        updateState.value = value
+        println("Update state changed: $value")
+    }
     var notes by remember { mutableStateOf<List<Note>>(emptyList()) }
 
     LaunchedEffect(Unit) {
@@ -38,9 +43,6 @@ fun QuickNotesNavGraph(
         startDestination = Screen.NoteList.route
     ) {
         composable(Screen.NoteList.route) {
-            // Refresh notes when navigating to NoteList
-            // getAll is suspend
-            // so we use LaunchedEffect to call it
             LaunchedEffect(Unit) {
                 notes = repository.getAll()
             }
@@ -57,8 +59,17 @@ fun QuickNotesNavGraph(
         composable(Screen.NoteView.route) { backStackEntry ->
             val noteId = backStackEntry.arguments?.getString("noteId")?.toIntOrNull()
             val note = notes.find { it.id == noteId }
+            LaunchedEffect(updateState.value) {
+                notes = repository.getAll()
+            }
             note?.let {
-                NoteView(note = it, navController = navController, repository = repository)
+                NoteView(
+                    _note = it,
+                    navController = navController,
+                    repository = repository,
+                    updateState = updateState
+                )
+                setUpdateState(false)
             }
         }
         composable(Screen.NoteEdit.route) { backStackEntry ->
@@ -68,6 +79,7 @@ fun QuickNotesNavGraph(
                 note = note,
                 navController = navController,
                 repository = repository,
+                setUpdateState = setUpdateState
             )
         }
     }

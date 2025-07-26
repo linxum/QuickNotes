@@ -17,6 +17,10 @@ class NoteViewModel(private val repository: NoteRepository) : ViewModel() {
         }
     }
 
+    fun getNote(id: Int): Note? {
+        return _notes.value?.find { it.id == id }
+    }
+
     fun deleteNote(note: Note) {
         viewModelScope.launch {
             repository.delete(note)

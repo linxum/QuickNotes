@@ -17,7 +17,7 @@ class NoteEditViewModel(private val repository: NoteRepository) : ViewModel() {
         }
     }
 
-    fun saveNote(note: Note) {
+    fun saveNote(note: Note, setUpdateState: (Boolean) -> Unit = {}) {
         viewModelScope.launch {
             if (note.id == 0) {
                 repository.insert(note)
@@ -25,6 +25,7 @@ class NoteEditViewModel(private val repository: NoteRepository) : ViewModel() {
             } else {
                 repository.update(note)
                 _notes.value = repository.getAll()
+                setUpdateState(true)
             }
         }
     }
